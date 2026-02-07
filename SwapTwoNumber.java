@@ -9,7 +9,6 @@ public class SwapTwoNumber {
         int c = a;
         a = b;
         b = c;
-
         System.out.println(a +" " + b);
         sc.close();
     }
