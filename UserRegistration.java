@@ -171,7 +171,7 @@ public class UserRegistration {
                 JOptionPane.showMessageDialog(frame, "Password dont match");
                 return;
             }
-                        // Regex for strong password
+            // Regex for strong password
             String passwordRegex =
                     "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$";
 
