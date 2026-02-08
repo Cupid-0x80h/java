@@ -2,117 +2,76 @@ import java.awt.*;
 import javax.swing.*;
 
 public class SimpleUi {
-
     public static void main(String[] args) {
-
-        /* ================= FRAME ================= */
-
-        // Create the main window
-        JFrame frame = new JFrame("Simple Java UI");
-
-        // Set window size
-        frame.setSize(500, 400);
-
-        // Close app when window is closed
+        JFrame frame = new JFrame("Java Assignement");
+        frame.setSize(500,450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Center the window on screen
         frame.setLocationRelativeTo(null);
-
-        // Use BorderLayout for main frame
         frame.setLayout(new BorderLayout());
 
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenu viewMenu = new JMenu("View");
+        JMenu aboutMenu = new JMenu("About Us");
 
-        /* ================= NAV BAR ================= */
+        menuBar.add(fileMenu);
+        menuBar.add(viewMenu);
+        menuBar.add(aboutMenu);
 
-        // Create a panel for navigation bar
-        JPanel navBar = new JPanel();
+        frame.setJMenuBar(menuBar);
 
-        // Set background color
-        navBar.setBackground(new Color(45, 45, 45));
-
-        // Create nav title label
-        JLabel navTitle = new JLabel("My Application");
-
-        // Set text color and font
-        navTitle.setForeground(Color.WHITE);
-        navTitle.setFont(new Font("Arial", Font.BOLD, 18));
-
-        // Add label to navbar
-        navBar.add(navTitle);
-
-        // Add navbar to top of frame
-        frame.add(navBar, BorderLayout.NORTH);
-
-
-        /* ================= FORM PANEL ================= */
-
-        // Panel for form content
-        JPanel formPanel = new JPanel();
-
-        // GridBagLayout is flexible for forms
-        formPanel.setLayout(new GridBagLayout());
-
-        // Helps control spacing and alignment
+        JPanel formPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // spacing
+        gbc.insets = new Insets(10, 10, 10, 10);
 
-
-        /* ================= LABEL: USERNAME ================= */
-
-        JLabel userLabel = new JLabel("Username:");
-
-        gbc.gridx = 0;  // column
-        gbc.gridy = 0;  // row
+        JLabel userLabel = new JLabel("UserName: ");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
         formPanel.add(userLabel, gbc);
 
-
-        /* ================= TEXT FIELD ================= */
-
         JTextField userText = new JTextField(15);
-
-        gbc.gridx = 1;
+        gbc.gridx =1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         formPanel.add(userText, gbc);
 
-
-        /* ================= LABEL: PASSWORD ================= */
-
-        JLabel passLabel = new JLabel("Password:");
-
+        JLabel passLabel = new JLabel("Password: ");
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.EAST;
         formPanel.add(passLabel, gbc);
 
-
-        /* ================= PASSWORD FIELD ================= */
-
         JPasswordField passText = new JPasswordField(15);
-
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.WEST;
         formPanel.add(passText, gbc);
 
+        JLabel userTypeLabel = new JLabel("User Type:");
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.EAST;
+        formPanel.add(userTypeLabel, gbc);
 
-        /* ================= SUBMIT BUTTON ================= */
-
-        JButton submitButton = new JButton("Submit");
+        String[] userTypes = {"Admin", "Normal User"};
+        JComboBox<String> userTypeDropdown = new JComboBox<>(userTypes);
 
         gbc.gridx = 1;
         gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        formPanel.add(userTypeDropdown, gbc);
+
+
+        JButton submitButton = new JButton("Submit");
+        submitButton.setPreferredSize(new Dimension(100,30));
+
+        gbc.gridx = 1;
+        gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.CENTER;
-        formPanel.add(submitButton, gbc);
+        formPanel.add(submitButton,gbc);
 
-
-        /* ================= ADD FORM TO FRAME ================= */
-
-        frame.add(formPanel, BorderLayout.CENTER);
-
-        // Make frame visible
+        frame.add(formPanel, BorderLayout.CENTER);                
         frame.setVisible(true);
     }
 }
