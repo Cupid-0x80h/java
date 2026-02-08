@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.Period;
 import javax.swing.*;
 
 public class UserRegistration {
@@ -135,6 +137,54 @@ public class UserRegistration {
         frame.add(panel, BorderLayout.CENTER);
 
         //validation logic
+        submit.addActionListener(e -> {
+
+            //DOB
+            try {
+                int yy = Integer.parseInt(year.getText());
+                int mm = Integer.parseInt(month.getText());
+                int dd = Integer.parseInt(day.getText());
+
+                LocalDate dob = LocalDate.of(yy, mm, dd);
+                int age = Period.between(dob, LocalDate.now()).getYears();
+
+                if(age < 18){
+                    JOptionPane.showConfirmDialog(frame, "User Must Be at least 18 to log in");
+                    return;
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame, "Invalid date of birt");
+                return;
+            }
+
+            //email validation
+            if(!email.getText().contains("@gmail.com")){
+                JOptionPane.showConfirmDialog(frame, "Email must be a valid gmail address");
+                return;
+            }
+
+            //passwrod validation
+            String pass = new String(password.getPassword());
+            String confirmPass = new String(conformPassword.getPassword());
+
+            if(!pass.equals(confirmPass)){
+                JOptionPane.showMessageDialog(frame, "Password dont match");
+                return;
+            }
+                        // Regex for strong password
+            String passwordRegex =
+                    "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$";
+
+            if (!pass.matches(passwordRegex)) {
+                JOptionPane.showMessageDialog(frame, """
+                                                     Password must be at least 8 characters and include:
+                                                     Uppercase, Lowercase, Number,Symbol""");
+                return;
+            }
+
+            JOptionPane.showMessageDialog(frame,"Registration Successful");
+
+        });
 
 
         frame.setVisible(true);
